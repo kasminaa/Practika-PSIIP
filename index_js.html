@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPA camp  js/css</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
+    <script src="index-js.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="index_js.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+       #scrollToTop {
+        display: none; /* скрываем кнопку при загрузке страницы */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color:#43c060;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+       #map {
+        width: 630px;
+        height: 452px;
+        left: 660px;
+        }
+        .hidden {
+            display: none;
+        }
+        .overlay111 {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 900; /* Устанавливаем высокий уровень z-index */
+        }
+
+        .form-container111 {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Устанавливаем высокий уровень z-index */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .car {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    width: 70px;
+    height: 40px;
+    background-image: url('car.png'); /* Путь к изображению машины */
+    background-size: cover;
+    transition: transform 10s linear;
+}
+
+.move {
+    transform: translateX(calc(100vw + 50px));
+}
+
+
+.swiper {
+      width: 100%;
+      height: 100%;
+      top: 90px;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 300px;
+      margin: 20px auto;
+    }
+
+    .append-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .append-buttons button {
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid #007aff;
+      color: #007aff;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin: 0 10px;
+      font-size: 13px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      
+      <div class="flex-row">
+        <div class="call-request">
+          <span class="call-request-2">Заказать звонок</span>
+        </div>
+        <div class="ellipse"></div>
+        <span class="health-camp">Детский<br>оздоровительный лагерь</span>
+        <div class="spa-camp"></div>
+        <div class="huge-icon"><div class="subtract"></div></div>
+        <div class="call-icon">
+          <div class="call"><div class="rectangle-3"></div></div>
+        </div>
+        <div class="slash"></div>
+        <span class="address">Сочи, ул. Кольцова 17</span>
+        <span class="phone-number">7 (495) 744 65 99</span>
+        <div class="vector"></div>
+        <div class="year-round"></div>
+      </div>
+      
+      <script>
+        function callNumber(phoneNumber) {
+            window.location.href = 'tel:' + phoneNumber;
+        }
+    </script>
+    
+      <div class="health-camp-4">
+        <span class="child">Детский<br></span
+        ><span class="health">оздоровительный</span
+        ><span class="camp"> лагерь</span>
+      </div>
+      <span class="modern-health-camp"
+        >Современный детский оздоровительный лагерь со своей SPA-программой,
+        специально разработанной для детей от 7 до 16 лет</span
+      >
+      <div class="flex-row-a">
+        <div class="frame" onclick="moveCar()"> <div class="car"></div>
+          <div class="frame-5">
+            <span class="travel" >В путешествие</span>
+            <div class="huge-icon-6"></div>
+          </div>
+        </div>
+        <div class="regroup">
+          <div class="play-button">
+            <div class="vector-7"></div>
+          </div>
+          <span class="watch-video"><a href="video-html.html" target="_blank" class="watch-video">Смотреть видео</a> </span>
+        </div>
+      </div>
+      <div class="flex-row-fa">
+        <div class="huge-icon-8">
+          <div class="subtract-9"></div>
+        </div>
+        <span class="plus">1 295 +</span>
+        <div class="huge-icon-a">
+          <div class="flag"><div class="combo-shape"></div></div>
+        </div>
+        <span class="price">7 500</span>
+        <div class="huge-icon-b"><div class="union"></div></div>
+        <span class="days">14 дней</span>
+        <div class="regroup-c">
+          <div class="huge-icon-d">
+            <div class="like"><div class="combo-shape-e"></div></div>
+          </div>
+          <span class="percentage-f">97%</span>
+        </div>
+      </div>
+      <div class="flex-row-10">
+        <span class="children-rested"
+          >Отдохнуло детей<br>в прошлом сезоне</span
+        ><span class="transfer-cost"
+          >Стоимость трансфера<br>в обе стороны</span
+        ><span class="session-duration">Длительность смены</span
+        ><span class="recommended">Рекомендуют нас</span>
+      </div>
+      <div class="flex-row-ea">
+        <span class="spa-procedures"
+          >SPA-процедуры<br>для каждого ребенка</span
+        ><span class="oxygen-cocktails">Кислородные коктейли</span
+        ><span class="chocolate-wrap">Шоколадное<br>обертывание тела</span>
+      </div>
+      <span class="photo-gallery">Фотогалерея</span
+      ><span class="special-events"
+        >Приготовьте фотоаппараты — это будет неповторимо!Каждый вечер проходят
+        особые вечерние концерты, дискотеки, где каждый почувствует себя звездой
+        и получит опыт первого успеха!</span
+      >
+      <div class="birthday-celebration">
+        <span class="emotions-joys">День Рождения в лагере!</span>
+        <div class="adventures">
+          <span class="unique-talent">Эмоций и радости</span
+          ><span class="rectangle-11">Приключения</span
+          ><span class="rectangle-12">Уникальный талант</span>
+        </div>
+      </div>
+      <div class="rectangle-13">
+        <div class="rectangle-14"></div>
+        <div class="flex-row-bab"></div>
+        <div class="rectangle-15"></div>
+        <div class="pic-c"></div>
+      </div>
+      <div class="section-7">
+        <div class="img-9"></div>
+        <div class="rectangle-16"></div>
+        <div class="rectangle-17"></div>
+        <div class="ellipse-18"></div>
+        <div class="ellipse-19"></div>
+        <div class="order-call">
+          <span class="more-photos">Больше фото на </span>
+          <div class="empty"></div>
+        </div>
+        <div class="rectangle-1a">
+          <span class="about-camp">О лагере</span>
+          <div class="flex-row-fb">
+            <span class="sport">Спорт</span
+            ><span class="medicine">Медицина</span
+            ><span class="restaurant">Ресторан</span
+            ><span class="pebble-beach">Галечный пляж</span
+            ><span class="exercise-zone">Зона тренажеров</span
+            ><span class="dance-floor">Танцевальная площадка</span
+            ><span class="theater-stage">Театеральная сцена</span>
+          </div>
+          <span class="pebble-beach-1b">Галечный пляж</span
+          ><span class="private-pebble-beach"
+            >Собственный галечный пляж доступный только для детей лагеря. Пляж
+            оборудован удобными лежаками, зонтами, навесами. Также на пляже
+            располагается медицинский пункт и спасательная служба</span>
+          
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="lag1.jpg" alt="Image 1"></div>
+              <div class="swiper-slide"><img src="lag2.webp" alt="Image 1"></div>
+              <div class="swiper-slide"><img src="lag3.jpg" alt="Image 1"></div>
+              <div class="swiper-slide"><img src="lag4.jpg" alt="Image 1"></div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        
+          <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        
+          <script>
+            var swiper = new Swiper(".mySwiper", {
+              slidesPerView: 3,
+              centeredSlides: true,
+              spaceBetween: 30,
+              pagination: {
+                el: ".swiper-pagination",
+                type: "fraction",
+              },
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+            });
+        
+            var appendNumber = 4;
+            var prependNumber = 1;
+            document
+              .querySelector(".prepend-2-slides")
+              .addEventListener("click", function (e) {
+                e.preventDefault();
+                swiper.prependSlide([
+                  '<div class="swiper-slide">Slide ' + --prependNumber + "</div>",
+                  '<div class="swiper-slide">Slide ' + --prependNumber + "</div>",
+                ]);
+              });
+            document
+              .querySelector(".prepend-slide")
+              .addEventListener("click", function (e) {
+                e.preventDefault();
+                swiper.prependSlide(
+                  '<div class="swiper-slide">Slide ' + --prependNumber + "</div>"
+                );
+              });
+            document
+              .querySelector(".append-slide")
+              .addEventListener("click", function (e) {
+                e.preventDefault();
+                swiper.appendSlide(
+                  '<div class="swiper-slide">Slide ' + ++appendNumber + "</div>"
+                );
+              });
+          </script>
+
+
+        </div>
+      </div>
+      <span class="our-sessions">Наши смены 2023</span
+      ><span class="we-organize-everything"
+        >МЫ ОРГАНИЗУЕМ ВСЕ ОСТАЛЬНОЕ: ТРАНСФЕР, ОТДЫХ И САМОЕ ПРИЯТНОЕ —
+        АТМОСФЕРУ!</span
+      >
+      <div class="flex-row-de">
+        <div class="winter"><span class="summer">Летняя смена</span></div>
+        <div class="autumn"><span class="winter-1e">Осенняя смена</span></div>
+        <div class="winter-1f"><span class="winter-20">Зимняя смена</span></div>
+        <div class="winter-21"><span class="spring">Весеняя смена</span></div>
+        <div class="regroup-22">
+          <div class="winter-23"><div class="rectangle-24"></div></div>
+          <div class="winter-25"><div class="rectangle-26"></div></div>
+        </div>
+      </div>
+      <div class="flex-row-eaf">
+        <div class="rectangle-27">
+          <div class="rectangle-28">
+            <div class="rectangle-29">
+              <span class="remaining-seats">осталось 83 места</span>
+            </div>
+          </div>
+          <span class="junior-leader">Начинающий вожд</span
+          ><span class="first-session">Первая смена</span
+          ><span class="from-to">с 01.06 по 14.06</span>
+          <div class="huge-icon-2a"><div class="union-2b"></div></div>
+          <span class="join-the-coolest-party"
+            >Присоединяйся к самой классной тусовке лета SPA&CAMP в Сочи!
+            Ежедневные интерактивы у бассейна вместе с вожатыми, квесты на
+            территории всего лагеря, мастер-классы, викторины, а это значит, что
+            ты не только познакомишься с новыми друзьями, но и отлично проведешь
+            время!</span
+          >
+          <div class="order-call-2c">
+            <span class="book-now">Забронировать</span>
+          </div>
+          <span class="price-2d">105 825 Р.</span
+          ><span class="whats-included">Что входит в стоимость</span>
+          <div class="huge-icon-2e">
+            <div class="help"><div class="subtract-2f" title="В стоиость входит: Проживание в отеле"></div></div>
+          </div>
+          <span class="price-30">88 825 Р.</span>
+        </div>
+        <div class="rectangle-31">
+          <div class="rectangle-32">
+            <div class="rectangle-33">
+              <span class="remaining-seats-34">осталось 83 места</span>
+            </div>
+          </div>
+          <span class="junior-leader-35">Начинающий вожд</span
+          ><span class="first-session-36">Первая смена</span
+          ><span class="from-to-37">с 01.06 по 14.06</span>
+          <div class="huge-icon-38"><div class="union-39"></div></div>
+          <span class="join-the-coolest-party-3a"
+            >Присоединяйся к самой классной тусовке лета CAMP&SPA в Сочи!
+            Ежедневные интерактивы у бассейна вместе с вожатыми, квесты на
+            территории всего лагеря, мастер-классы, викторины, а это значит, что
+            ты не только познакомишься с новыми друзьями, но и отлично проведешь
+            время!</span
+          >
+          <div class="order-call-3b">
+            <span class="book-now-3c">Забпронировать</span>
+          </div>
+          <div class="order-call-3d">
+            <span class="learn-more">Подробнее</span>
+          </div>
+          <span class="price-3e">88 825 Р.</span>
+        </div>
+      </div>
+      <div class="flex-row-cc">
+        <div class="ellipse-3f"></div>
+        <div class="ellipse-40"></div>
+        <div class="ellipse-41"></div>
+        <div class="ellipse-42"></div>
+      </div>
+      <div class="flex-row-fd">
+        <div class="png-clipart-slush"></div>
+        <div class="rectangle-43">
+          <div class="mask-group">
+            <div class="flex-column">
+              <span class="first-discount-offer"
+                >Хотите узнавать о скидках и предложениях первыми ?</span
+              ><span class="subscribe-newsletter"
+                >Подпишитесь на рассылку!</span
+              >
+              <div class="rectangle-44">
+                <div class="rectangle-45">
+                    <span class="subscribe-button" onclick="subscribe()">Подписаться</span>
+                </div>
+                <input type="email" class="email-input" placeholder="example@mail.ru">
+  
+              </div>
+              <div class="ellipse-46"></div>
+              <div class="huge-icon-47">
+                <div class="lock"><div class="union-48"></div></div>
+              </div>
+            </div>
+            <div class="privacy-policy-agreement">
+              <span class="privacy-policy-text"
+                >Нажимая на кнопку “Подписаться” вы соглащаетесь<br>с </span
+              ><span class="privacy-policy-link"
+                >Политикой конфиденциальности</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="our-professional-team">
+          <span class="team-name">Наша команда<br></span
+          ><span class="professionals">профессионалов</span>
+        </div>
+      </div>
+      <div class="flex-row-49">
+        <div class="ellipse-4a"></div>
+        <div class="ellipse-4b"></div>
+        <div class="ellipse-4c"></div>
+        <div class="ellipse-4d"></div>
+        <div class="ellipse-4e"></div>
+        <div class="ellipse-4f"></div>
+        <div class="ellipse-50"></div>
+        <div class="ellipse-51"></div>
+        <div class="ellipse-52"></div>
+        <div class="ellipse-53"></div>
+        <div class="ellipse-54"></div>
+        <div class="ellipse-55"></div>
+        <div class="ellipse-56"></div>
+        <div class="ellipse-57"></div>
+        <div class="ellipse-58"></div>
+        <div class="ellipse-59"></div>
+        <div class="ellipse-5a"></div>
+        <div class="ellipse-5b"></div>
+        <div class="ellipse-5c"></div>
+        <div class="ellipse-5d"></div>
+      </div>
+      <div class="flex-row-5e">
+        <span class="team-member">Татьяна Александровна</span
+        ><span class="team-member-5f">Катерина Владимировна</span
+        ><span class="team-member-60">Татьяна Александровна</span
+        ><span class="team-member-61">Софья Анатольевна</span>
+      </div>
+      <div class="flex-row-62">
+        <span class="cosmetologist-massage-therapist"
+          >Косметолог, массажист</span
+        ><span class="spa-manager">Руководитель SPA</span
+        ><span class="cosmetologist-massage-therapist-63"
+          >Косметолог, массажист</span
+        ><span class="massage-therapist">Массажист</span>
+      </div>
+      <div class="flex-row-64">
+        <div class="water-drops-clipart"></div>
+        <span class="certified-massage-therapist"
+          >Работает в компании с момента основания. Сертифицированный
+          массажист</span
+        ><span class="certified-massage-therapist-65"
+          >Работает в компании с момента основания. Сертифицированный
+          массажист</span
+        ><span class="experienced-cosmetologist-massage-therapist"
+          >Специалист с большим стажемработы в центрах косметологии и массажа.,
+          участвует в развитии проектов. Эксперт в области косметологии,
+          массажа</span
+        ><span class="certified-massage-therapist-66"
+          >Присоединилась к команде спустя полгода открытия. Сертифицированный
+          массажист</span
+        >
+        <div class="quote"></div>
+        <div class="client-testimonials">
+          <span class="client-testimonials-67">Что о нас говорят<br></span
+          ><span class="our-clients">наши клиенты</span>
+        </div>
+        <div class="ellipse-68"></div>
+        <div class="ellipse-69"></div>
+        <div class="rectangle-6a"></div>
+        <div class="rectangle-6b"></div>
+      </div>
+      <div class="flex-row-6c">
+        <div class="rectangle-6d">
+          <span class="client-name">Варвара Капустина</span>
+          <div class="flex-row-6e">
+            <div class="huge-icon-6f"><div class="star"></div></div>
+            <div class="huge-icon-70"><div class="star-71"></div></div>
+            <div class="huge-icon-72"><div class="star-73"></div></div>
+            <div class="huge-icon-74"><div class="star-75"></div></div>
+            <div class="huge-icon-76"><div class="star-div"></div></div>
+          </div>
+          <span class="first-time-span"
+            >Я первый раз в детском лагере вообще. Всегда считала себя замкнутой
+            и необщительной, так и было до приезда сюда. Одноклассницу
+            распределили в другой отряд, я растерялась, вокруг одни незнакомые
+            люди. Но эта ситуация меня поменяла, я начала знакомиться сначала с
+            земляками, потом с девочками из комнаты, а потом уже и с ребятами из
+            разных отрядов. Детский лагерь поменял мне характер!</span
+          >
+        </div>
+        <div class="rectangle-div">
+          <div class="flex-row-div">
+            <span class="tamara-span">Тамара Носкова</span>
+            <div class="regroup-div">
+              <div class="huge-icon-div"><div class="star-div-77"></div></div>
+              <div class="huge-icon-div-78">
+                <div class="star-div-79"></div>
+              </div>
+              <div class="huge-icon-div-7a">
+                <div class="star-div-7b"></div>
+              </div>
+              <div class="huge-icon-div-7c">
+                <div class="star-div-7d"></div>
+              </div>
+              <div class="huge-icon-div-7e">
+                <div class="star-div-7f"></div>
+              </div>
+            </div>
+          </div>
+          <span class="thanks-span"
+            >Хочу выразить огромную благодарность лагерю, за отдых моего ребёнка
+            и его друзей! (нас две семьи приезжали) Такого лагеря мы ещё не
+            видели. Корпуса, столовая, бассейн, кино под открытым небом😍 Всё на
+            высшем уровне. Отдельно спасибо вожатым на 1и 2ом отрядах! Вас
+            вспоминают каждый день. Светлана Петровна, наша вторая мама) Ваша
+            любовь и забота о детях нас очень радовала. С характером наших ребят
+            сложно находить общий язык, но у вас получилось!) Приедем
+            обязательно в следующем году.</span
+          >
+        </div>
+        <div class="rectangle-div-80">
+          <div class="flex-row-e-div">
+            <span class="varvara-span">Варвара Капустина</span>
+            <div class="regroup-div-81">
+              <div class="huge-icon-div-82">
+                <div class="star-div-83"></div>
+              </div>
+              <div class="huge-icon-div-84">
+                <div class="star-div-85"></div>
+              </div>
+              <div class="huge-icon-div-86">
+                <div class="star-div-87"></div>
+              </div>
+              <div class="huge-icon-div-88">
+                <div class="star-div-89"></div>
+              </div>
+              <div class="first-time-span-8a">
+                <div class="first-time-span-8b"></div>
+              </div>
+            </div>
+          </div>
+          <span class="rectangle-div-8c"
+            >Я первый раз в детском лагере вообще. Всегда считала себя замкнутой
+            и необщительной, так и было до приезда сюда. Одноклассницу
+            распределили в другой отряд, я растерялась, вокруг одни незнакомые
+            люди. Но эта ситуация меня поменяла, я начала знакомиться сначала с
+            земляками, потом с девочками из комнаты, а потом уже и с ребятами из
+            разных отрядов. Детский лагерь поменял мне характер!</span
+          >
+        </div>
+        <div class="varvara-span-8d">
+          <span class="flex-row-eeff-div">Варвара Капустина</span>
+          <div class="huge-icon-div-8e">
+            <div class="star-div-8f"><div class="huge-icon-div-90"></div></div>
+            <div class="star-div-91"><div class="huge-icon-div-92"></div></div>
+            <div class="star-div-93"><div class="huge-icon-div-94"></div></div>
+            <div class="star-div-95">
+              <div class="first-time-span-96"></div>
+            </div>
+            <div class="first-time-span-97">
+              <div class="flex-row-div-98"></div>
+            </div>
+          </div>
+          <span class="ellipse-div"
+            >Я первый раз в детском лагере вообще. Всегда считала себя замкнутой
+            и необщительной, так и было до приезда сюда. Одноклассницу
+            распределили в другой отряд, я растерялась, вокруг одни незнакомые
+            люди. Но эта ситуация меня поменяла, я начала знакомиться сначала с
+            земляками, потом с девочками из комнаты, а потом уже и с ребятами из
+            разных отрядов. Детский лагерь поменял мне характер!</span
+          >
+        </div>
+      </div>
+      <div class="ellipse-div-99">
+        <div class="ellipse-div-9a"></div>
+        <div class="ellipse-div-9b"></div>
+        <div class="rectangle-div-9c"></div>
+        <div class="flex-row-fee-div"></div>
+      </div>
+      <div class="nice-camp-span"></div>
+      <div class="_-kartinkin-net-p-pattern-znaka-krasivo-div">
+        <div class="comfortable-accommodation-span">
+          <span class="safe-span" onclick="fireworks()">Ваш любимый лагерь<br>Nice-Camp - это:</span>
+<div class="fireworks"></div>
+          <div class="flex-row-dc-div">
+            <span class="comfortable-accommodation-span-9d"
+              >Комфортное размещение</span
+            ><span class="full-board-span">Безопасность</span>
+          </div>
+          <span class="full-board-span-9e"
+            >В нашем лагере дети живут в уютных комнатах с кроватями и другими
+            удобствами</span
+          ><span class="flex-row-eb-div">Полноценное питание</span
+          ><span class="english-lessons-span"
+            >Наши повара учитываюсь все пещевые<br>предпочитения и потребности
+            детей</span
+          >
+          <div class="spa-span">
+            <span class="english-lessons-span-9f">Обучение Английского</span
+            ><span class="active-life-span">SPA</span>
+          </div>
+          <span class="active-life-span-a0"
+            >Каждому ребенку наши учителья<br>поможет раскрыт свои
+            уникальные<br>таланты и научить Английскому</span
+          >
+        </div>
+        <div class="flex-row-dc-div-a1">
+          <span class="leisure-and-entertainment-span">Активная жинзь</span
+          ><span class="leisure-and-entertainment-span-a2"
+            >В лагере есть два бассейна, площадки для<br>игр футбола,
+            баскетбола, Теннисный корт<br>и в многие другие актиыные
+            игры</span
+          ><span class="gifts-span">Досуг и развлечения</span
+          ><span class="gifts-span-a3"
+            >В лагере есть творческие кружки, подходы и екскурсии, музыкальные
+            вчера и дискотеки, а также многое другое</span
+          ><span class="flex-row-dc-div-a4">Подарки</span
+          ><span class="scenic-view-span"
+            >Ценный подарок каждому ребенку<br>после окончания смены</span
+          >
+        </div>
+        <span class="spa-included-span"
+          >В лагере работают квалифицированные<br>врачи, а территория оснащена
+          системой<br>безопновсти, камерами и ограждениями</span
+        ><span class="scenic-view-span-a5">Живописный вид</span
+        ><span class="spa-included-span-a6"
+          >Лагере расположенный на первой<br>береговой линии в 50 метрах от
+          моря<br>в экологически чистом районе Сочи.</span
+        ><span class="flex-row-dc-div-a7"
+          >SPA-процедуры для каждого ребенка<br>уже включены в стоимость!
+          Профессиональные мастера ведения SPA оздоровления и релакса</span
+        >
+        <div class="ellipse-div-a8"></div>
+        <div class="spa-kit-div"></div>
+      </div>
+      <div class="rectangle-a9"></div>
+      <div class="flex-row-d-aa">
+        <div class="rectangle-ab"></div>
+        <div class="rectangle-ac"></div>
+        <div class="rectangle-ad"></div>
+        <div class="dlya-kazhdogo-rebenka">
+          <span class="dlya">Для </span
+          ><span class="kazhdogo-rebenka">каждого ребенка</span>
+        </div>
+        <span class="spa-protsedury">SPA-процедуры</span
+        ><span class="angliiskii">|</span
+        ><span class="kurs-ozdorovitel-nogo-massazha">Ангдийский</span
+        ><span class="zakazat-zvonok"
+          >Курс оздоровительного массажа уже включены в стоимость!</span
+        >
+        <button class="khotu-takoe" onclick="scrollToTop()">Хочу такое</button>
+        <script>
+          window.onscroll = function() {scrollFunction()};
+  
+          function scrollFunction() {
+              if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                  document.querySelector(".khotu-takoe").style.display = "block";
+              } else {
+                  document.querySelector(".khotu-takoe").style.display = "none";
+              }
+          }
+  
+          function scrollToTop() {
+              document.body.scrollTop = 0; // For Safari
+              document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+          }
+      </script>
+</div>
+
+
+      <div class="rectangle-ae"></div>
+      <div class="flex-row-e"></div>
+      <div class="kartinkin-net-p-pattern-znaka-krasivo">
+        <div class="chasto-zadavaemye-voprosy">
+          <span class="pered-pokupkoi">Часто задаваемые вопросы</span>
+          <div class="pered-zaezdom">
+            <span class="obshchie-voprosy">Перед покупкой</span
+            ><span class="kartinkin-net-p-pattern-znaka-krasivo-af"
+              >Перед заездом</span
+            ><span class="rectangle-b0">Общие вопросы</span>
+          </div>
+        </div>
+        <div class="huge-icon-b1"></div>
+        <div class="vector-b2">
+          <div class="a-esli-moemu-rebenku-ne-ponravitsya">
+            <div class="rectangle-b3"></div>
+          </div>
+          <span class="huge-icon-b4"
+            >А если моему ребенку не понравиться ?</span
+          >
+        </div>
+        <div class="vector-b5">
+          <div class="kakie-dokumenty-nuzhno-brat">
+            <div class="rectangle-b6"></div>
+          </div>
+          <span
+            class="v-tseli-obespecheniya-bezopasnosti-zhizni-i-zdorovya-detey"
+            >Какие документы нужно брать ?</span
+          >
+        </div>
+        <div class="huge-icon-b7">
+          <span class="poseshchenie-detey-roditelyami"
+            >В целях обеспечения безопасности жизни и здоровья детей,
+            находящихся на отдыхе, а также обеспечения общественного порядка,
+            проход на территорию лагеря категорически ЗАПРЕЩЕН.Проход в жилые
+            детские корпуса запрещен всегда, независимо от дня и погодных
+            условий (по нормам санитарно-эпидемиологического надзора).Выход
+            ребенка за территорию разрешается только по письменному заявлению
+            родителя на имя директора лагеря, при наличии документа,
+            удостоверяющего личность.Забирать за территорию не своего ребёнка
+            (близких и дальних родственников, друзей семьи и пр.) возможно
+            только при наличии:· Нотариально заверенной доверенности от
+            родителей ребёнка, которого планируете забрать;В данном случае
+            ребёнок покидает территорию под ответственность родителей.
+            Запрещается посещать и забирать ребёнка за территорию лагеря
+            родителями в нетрезвом виде.</span
+          >
+          <div class="ellipse-b8"></div>
+          <span class="rectangle-b9">Посещение детей родителями ?</span>
+        </div>
+        <div class="huge-icon-ba"></div>
+        <div class="vector-bb">
+          <div class="kakoi-budet-rasporyadok-dnya">
+            <div class="ellipse-bc"></div>
+          </div>
+          <span class="rectangle-bd">Какой будет распорядок дня ?</span>
+        </div>
+        <div class="huge-icon-be"></div>
+        <div class="vector-bf">
+          <div class="kak-kormyat-v-lagare"><div class="ellipse-c0"></div></div>
+          <span class="detskii-ozdorovitelnyi-lager"
+            >Как кормять в лагаре ?</span
+          >
+        </div>
+        <div class="spa-camp-c1"></div>
+        <span class="slash-c2">Детский<br>оздоровительный лагерь</span>
+        <div class="vector-c3"></div>
+        <div class="rabotaem-kruglyi-god"></div>
+        <div class="inn-kpp-ogrn"></div>
+        <div class="huge-icon-c4"></div>
+        <span class="subtract-c5"
+          >ИНН 7720889121<br>КПП 772001001<br>ОГРН 1237700127598</span
+        >
+        <div class="sochi-ul-koltsova">
+          <div class="huge-icon-communication-solid-call"></div>
+        </div>
+        <span class="call-c6">Сочи, ул. Кольцова 17</span>
+        <div class="rectangle-c7">
+          <div class="flex-row-c"><div class="rectangle-c8"></div></div>
+        </div>
+        <span class="ellipse-c9">7 (495) 744 65 99</span>
+      </div>
+      <div class="group">
+        <div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([53.6688, 23.8258], 12); // Координаты Гродно и уровень масштабирования
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    var marker = L.marker([53.6688, 23.8258]).addTo(map);
+    marker.bindPopup("<b>Grodno</b>").openPopup();
+</script>
+
+
+
+        <span class="telegram">Подпишитесь</span>
+        <div class="whatsapp"></div>
+        <span class="bg">РТО 204481</span>
+        <a href="https://web.telegram.org/k/" target="_blank"><div class="empty-cb"></div></a>
+        <div class="empty-cc"></div>
+        <div class="empty-cd">
+       <div class="empty-ce"></div>
+        </div>
+        <span class="empty-cf"
+          >© ООО "SPA&CAMP", 2011-2023.<br>Все материалы данного сайта
+          являются объектами авторского права.</span>
+          <span class="zakazat-zvonok-d1">Заказать звонок</span>
+          <button onclick="toggleForm()" style="display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: nowrap;
+          gap: 10px;
+          position: absolute;
+          width: 190px;
+          height: 70px;
+          top: 368px;
+          left: 330px;
+          padding: 21px 18px 21px 18px;
+          background: #43c060;
+          z-index: 350;
+          overflow: hidden;
+          border-radius: 10px;
+          color: #ffffff;
+  font-family: Montserrat, var(--default-font-family);
+  font-size: 18px;
+  border: none;">Заказать звонок</button>
+
+<div id="overlay" class="overlay111"></div>
+
+<div id="formContainer" class="form-container111">
+    <form id="myForm">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="phone">Номер телефона:</label>
+        <input type="text" id="phone" name="phone"><br><br>
+        <button class="zakazat-z-f" type="button" onclick="submitForm()">Oтправить</button>
+    </form>
+
+<script>
+    function toggleForm() {
+        var overlay = document.getElementById("overlay");
+        var formContainer = document.getElementById("formContainer");
+
+        overlay.style.display = "block";
+        formContainer.style.display = "block";
+    }
+
+    function submitForm() {
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        alert("Name: " + name + "\nPhone Number: " + phone);
+        document.getElementById("myForm").reset();
+
+        var overlay = document.getElementById("overlay");
+        var formContainer = document.getElementById("formContainer");
+
+        overlay.style.display = "none";
+        formContainer.style.display = "none";
+    }
+</script>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Получите кешбек 10%</h2>
+          <form>
+              <label for="fullName">ФИО:</label><br>
+              <input type="text" id="fullName" name="fullName" style="height: 20px; width: 200px; border-color: #43c060;"><br><br>
+              <label for="phoneNumber">Номер телефона:</label><br>
+              <input type="text" id="phoneNumber" name="phoneNumber" style="height: 20px; width: 200px; border-color: #43c060;"><br><br>
+              <label for="email">E-mail:</label><br>
+              <input type="email" id="email" name="email" style="height: 20px; width: 200px; border-color: #43c060;"><br><br>
+              <input type="checkbox" id="ageConfirmation" name="ageConfirmation">
+              <label for="ageConfirmation" style="font-family: Montserrat, var(--default-font-family);
+              font-size: 12px;">Я подтверждаю, что мне есть 18 лет. Я согласен (а) с политикой <br> конфиденциальности и сбором персональных данных</label><br><br>
+              <button type="submit" style="background-color: #43c060;font-family: Montserrat, var(--default-font-family);
+              font-size: 18px;
+              border: none; color: #ffffff;">Отправить заявку</button>
+          </form>
+      </div>
+  </div>
+
+  <script src="index-js.js"></script>
+
+
+  <button id="scrollToTop" onclick="topFunction()">↑</button>
+    
+  <script>
+    // Когда пользователь прокручивает вниз 20px от верхней части документа, покажем кнопку
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("scrollToTop").style.display = "block";
+        } else {
+            document.getElementById("scrollToTop").style.display = "none";
+        }
+    }
+
+    // Плавный скролл при нажатии на кнопку
+    function topFunction() {
+        // Получаем текущее положение прокрутки
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if (currentScroll > 0) {
+            // Выполняем анимацию плавного скролла
+            window.requestAnimationFrame(topFunction);
+            window.scrollTo(0, currentScroll - currentScroll / 8); // Измените значение делителя для более плавного скролла
+        }
+    }
+</script>
+
+  </body>
+</html>
